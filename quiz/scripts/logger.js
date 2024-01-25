@@ -3,9 +3,9 @@ function logMsg(){
     console.log('Error: ${this.errMsg}');
 }
 
-const o = {
+const o1 = {
     val: [1,2,3],
     errMsg: 'This is an error'
 };
 
-logMsg(o);
+logMsg(o1);
