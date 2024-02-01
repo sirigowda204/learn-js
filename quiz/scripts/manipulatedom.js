@@ -21,8 +21,10 @@ function createTxtNode(txt) {
   return txtNode;
 }
 
-function createBtnNode(btnTxt, e, l) {
+function createBtnNode(btnTxt, eventType, listener) {
   let btnNode = document.createElement("button");
+  btnNode.textContent = btnTxt;
+  btnNode.addEventListener(eventType, listener);
   return btnNode;
 }
 
@@ -33,14 +35,20 @@ function addTable() {
     let col2 = createTDNode(createBtnNode("Edit Text", "click", function() {
       edit(col1);
     }));
-    tableNode.appendChild(createTRNode([col1]));
+    tableNode.appendChild(createTRNode([col1, col2]));
   }
   document.getElementById("root").appendChild(tableNode);
 }
 
 function edit(node){
-  let newNode = document.createElement("input");
-  newNode.type = 'text';
-  newNode.placeholder = "Enter cell (x,y) ...";
+  let input = document.createElement("input");
+  input.type = 'text';
+  input.placeholder = "Enter cell (x, y) ...";
+
+  input.addEventListener('blur', () => node.textContent = input.placeholder);
+
+  node.innerHTML = '';
+  node.appendChild(input);
+  input.focus();
 }
 
